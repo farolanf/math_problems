@@ -14,7 +14,7 @@ export default function Steps(props) {
         <View style={styles.stepsContainer}>
             {props.steps.map((step, i) => (
                 <Step key={i} style={[step.current && styles.currentStep]}>
-                    {step.state === 'correct' && <Text style={styles.bgWhite}>&#x2713;</Text>}
+                    {step.state === 'correct' && <Text style={styles.stepText}>&#x2713;</Text>}
                 </Step>
             ))}
         </View>

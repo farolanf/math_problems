@@ -2,10 +2,14 @@ import { StyleSheet, NativeModules, Platform } from 'react-native'
 
 const { StatusBarManager } = NativeModules
 
+const isWeb = Platform.OS === 'web'
+
 const safePaddingTop = Platform.OS === 'android' ? StatusBarManager.HEIGHT : 0
 
 const theme = {
     primaryColor: '#4d0179',
+    stepSize: 10,
+    currentStepSize: 14,
 }
 
 const styles = StyleSheet.create({
@@ -15,7 +19,6 @@ const styles = StyleSheet.create({
     icon: {
         width: 30,
         height: 30,
-        color: 'white',
     },
     container: {
         flex: 1,
@@ -26,7 +29,7 @@ const styles = StyleSheet.create({
         backgroundColor: theme.primaryColor,
     },
     topBar: {
-        maxHeight: 64,
+        maxHeight: safePaddingTop + 64,
         flexDirection: 'row',
         justifyContent: 'space-between',
         color: '#fff',
@@ -39,7 +42,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     topBarTitle: {
-        fontSize: 16,
+        fontSize: 15,
         fontWeight: '600',
         marginTop: 12,
     },
@@ -52,22 +55,35 @@ const styles = StyleSheet.create({
         marginTop: 6,
     },
     step: {
-        flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        fontSize: 10,
-        color: 'black',
-        width: 8,
-        height: 8,
+        width: theme.stepSize,
+        height: theme.stepSize,
+        maxWidth: theme.stepSize,
+        maxHeight: theme.stepSize,
         overflow: 'hidden',
-        fontWeight: 600,
         borderRadius: 10000,
         borderColor: 'white',
         borderWidth: StyleSheet.hairlineWidth,
     },
+    stepText: {
+        textAlign: 'center',
+        textAlignVertical: 'center',
+        fontSize: theme.stepSize,
+        lineHeight: theme.stepSize,
+        width: theme.stepSize,
+        height: theme.stepSize,
+        maxWidth: theme.stepSize,
+        maxHeight: theme.stepSize,
+        marginTop: isWeb ? 0 : 2,
+        color: 'black',
+        backgroundColor: 'white',
+    },
     currentStep: {
-        width: 12,
-        height: 12,
+        width: theme.currentStepSize,
+        height: theme.currentStepSize,
+        maxWidth: theme.currentStepSize,
+        maxHeight: theme.currentStepSize,
         borderWidth: 4,
     },
     problemContainer: {
